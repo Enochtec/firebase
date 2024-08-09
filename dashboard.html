@@ -10,6 +10,8 @@
 <body>
     <div class="header">
         <div class="container">
+            <!-- <button id="logout" class="logout-button">Logout</button> -->
+
             <div class="logo">
                 <img src="logo.png" alt="Logo">
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -44,43 +46,47 @@
       const username = urlParams.get('username');
       document.getElementById('username').textContent = username;
     </script> -->
-    
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  
-<a href="#" onclick="openSection('dashboard')">
-  <i class="material-icons">dashboard</i> Dashboard
-</a>
-
-<a href="#" onclick="openSection('training')">
-  <i class="material-icons">school</i> Training
-</a>
-
-<a href="#" onclick="openSection('availableTasks')">
-  <i class="material-icons">assignment</i> Available Tasks
-</a>
-
-<a href="#" onclick="openSection('submissionPanel')">
-  <i class="material-icons">cloud_upload</i> Submission Panel
-</a>
-
-<a href="#" onclick="openSection('withdrawFunds')">
-  <i class="material-icons">attach_money</i> Withdraw Funds
-</a>
-
-<a href="#" onclick="openSection('upgradeToPremium')">
-  <i class="material-icons">star</i> Upgrade to Premium
-</a>
-
-<a href="#" onclick="openSection('referralProgram')">
-  <i class="material-icons">group</i> Referral Program
-</a>
-
-<a href="#" onclick="openSection('specialTraining')">
-  <i class="material-icons">badge</i> Special Training
-</a>
-  <!-- <a href="#" onclick="openSection('profile')">Profile</a> -->
-</div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <a href="#" onclick="openSection('dashboard')">
+          <i class="material-icons">dashboard</i> Dashboard
+        </a>
+      
+        <a href="#" onclick="openSection('training')">
+          <i class="material-icons">school</i> Training
+        </a>
+      
+        <a href="#" onclick="openSection('availableTasks')">
+          <i class="material-icons">assignment</i> Available Tasks
+        </a>
+      
+        <a href="#" onclick="openSection('submissionPanel')">
+          <i class="material-icons">cloud_upload</i> Submission Panel
+        </a>
+      
+        <a href="#" onclick="openSection('withdrawFunds')">
+          <i class="material-icons">attach_money</i> Withdraw Funds
+        </a>
+      
+        <a href="#" onclick="openSection('upgradeToPremium')">
+          <i class="material-icons">star</i> Upgrade to Premium
+        </a>
+      
+        <a href="#" onclick="openSection('referralProgram')">
+          <i class="material-icons">group</i> Referral Program
+        </a>
+      
+        <a href="#" onclick="openSection('specialTraining')">
+          <i class="material-icons">badge</i> Special Training
+        </a>
+      
+        <!-- Logout link -->
+        <a href="#" id="logout">
+          <i class="material-icons">exit_to_app</i> Logout
+        </a>
+      </div>
+      
 
 <div id="main">
     
@@ -106,8 +112,8 @@
                 // Import the Firebase functions you need from the SDKs
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
                 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        
+                import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+            
                 // Firebase configuration
                 const firebaseConfig = {
                     apiKey: "AIzaSyB6PIBb6GvXFaE0ZX9XS2r-8e5mYN5FifM",
@@ -118,12 +124,12 @@
                     appId: "1:609044591883:web:39119609a075ee90e15e0e",
                     measurementId: "G-NG87JBENW4"
                 };
-        
+            
                 // Initialize Firebase
                 const app = initializeApp(firebaseConfig);
                 const analytics = getAnalytics(app);
                 const auth = getAuth();
-        
+            
                 // Wait for the DOM to fully load
                 document.addEventListener("DOMContentLoaded", function() {
                     // Check the authentication state
@@ -132,7 +138,7 @@
                             // User is signed in, retrieve and display the user's name and email
                             const userName = user.displayName || "No Name Set";
                             const userEmail = user.email;
-        
+            
                             document.getElementById('name').innerText = userName;
                             document.getElementById('user').innerText = userEmail;
                         } else {
@@ -141,8 +147,20 @@
                             document.getElementById('user').innerText = "Not Logged In";
                         }
                     });
+            
+                    // Add logout functionality
+                    document.getElementById("logout").addEventListener("click", function() {
+                        signOut(auth).then(() => {
+                            alert("Logout successful!");
+                            window.location.href = "login.html";
+                        }).catch((error) => {
+                            console.error("Error during logout:", error);
+                            alert("Error during logout: " + error.message);
+                        });
+                    });
                 });
             </script>
+            
             
           <div class="info-block">
               <h4>ACCOUNT STATUS</h4>
