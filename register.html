@@ -26,22 +26,18 @@
   </style>
 </head>
 <body>
-
+  <div class="header-text">
+    <h3>Welcome to Our Registration Page!</h3>
+  </div>
 <div class="container">
   <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo here -->
-  <h2>Register Account</h2>
+  <h3 style="color: #9b99a8;"> CREATE YOUR ACCOUNT</h3>
   <form action="#" method="post">
     <label for="name"><b>Username:</b></label>
     <input type="text" id="name" name="name" placeholder="Enter your username" required>
 
     <label for="email"><b>Email:</b></label>
     <input type="email" id="email" name="email" placeholder="Input your Email address" required>
-
-  <label for="phone"><b>Telephone number:</b></label>
-    <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
-    
-    <label for="password"><b>Password:</b></label>
-    <input type="password" id="password" name="password" placeholder="Enter Password" required>
 
     <label for="gender"><b>Gender:</b></label>
     <select id="gender" name="gender" required>
@@ -54,9 +50,17 @@
     <label for="referral"><b>Referral Code (Optional):</b></label>
     <input type="text" id="referral" name="referral" placeholder="Enter referral code">
 
+    <label for="password"><b>Password:</b></label>
+    <input type="password" id="password" name="password" placeholder="Enter Password" required>
+
+    <label for="confirm-password"><b>Confirm Password:</b></label>
+    <input type="password" id="confirm-password" name="password" placeholder="Repeat Password" required>
+
+
     <button type="button" id="register" name="register"><b>Register</b></button>
   </form>
   <div class="login-link">
+    
     <a href="login.html">Already have an account? Login</a>
   </div>
 </div>

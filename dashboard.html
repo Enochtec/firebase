@@ -6,6 +6,7 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
@@ -19,6 +20,22 @@
             </div>
             
             <div id="welcomeMessage"></div>
+            <div class="top-right">
+                <div class="dropdown">
+                    <div class="dropdown-toggle">
+                        <i class="fas fa-bell"></i>
+                        <div class="notification-count">0</div>
+                    </div>
+                    <div class="dropdown-content">
+                     <a href="notification">
+                        <i class="fas fa-bell">Notifications<div class="notification-count">0</div></i>
+                     </a>
+                     <a href="login.html">
+                        <i class="fas fa-sign-out-alt">Logout</i>
+                     </a>
+                    </div>
+                </div>
+            </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -36,7 +53,7 @@
 
      
             <div class="profile">
-                <img src="logo.png" alt="Profile">
+                <!-- <img src="logo.png" alt="Profile"> -->
             </div>
         </div>
         
@@ -91,11 +108,13 @@
 <div id="main">
     
   <div id="dashboard" >
-    <h1>Dashboard</h1>
-    <div class="countdown">
-        <h2>Countdown To Launching</h2>
-        <p id="demo">Countdown to Launching</p>
+     <div class="content-header"><h1 style="color: aliceblue;">Dashboard</h1>
+        <div class="countdown">
+            <p style="color: aliceblue;">Countdown To Launching: </p>
+            <p id="demo">Countdown to Launching</p>
+        </div>
     </div>
+    <div class="border">
       <div class="dashboard-content">
         <div class="user-info">
             <div class="info-block">
@@ -107,7 +126,6 @@
                 <p><span id="user"></span></p>
             </div>
             
-    
             <script type="module">
                 // Import the Firebase functions you need from the SDKs
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
@@ -191,37 +209,40 @@
               document.getElementById('name').textContent = username; // Assuming name is the same as username
           }
       </script>
-  
 
       </div>
+
     <div class="activate">
         <h4>HOW TO ACTIVATE YOUR ACCOUNT</h4>
         <p style='color:red;' >NOTE:Account activation is ONLY via  pochi la biashara </p>
         <p>Follow the procedures below to activate your account</p>
-        <p>~Go to lipa na mpesa</p>
-        <p>~Pochi La Biashara 0115223085 (Zadock)</p>
-        <p>~Amount KSH.500</p>
-        <p>~Enter M-pesa pin to complete the transaction</p>
-        <p>~Once done,copy the M-PESA code(i.e QL72N6QO2G)</p>
-        <p>~And <a href="#" style="text-decoration: none;">Click Here</a> paste the code to activate your account instantly.</p>
+        <p>Go to lipa na mpesa</p>
+        <p>Buy Goods Till Number: <b>4277276</b></p>
+        <p>Amount <b>KSH.500</b></p>
+        <p>Enter M-pesa pin to complete the transaction (Zadock)</p>
+        <p>Once done,copy the M-PESA code(i.e QL72N6QO2G)</p>
+        <p>And <a href="#" style="text-decoration: none;">Click Here</a> paste the code to activate your account instantly.</p>
     </div>
     <div class="conduct">
         <h4>YOU CAN FIND US:</h4>
         <p>Telegram Channel: <a href="t.me:" style="text-decoration: none;">Click to Join.</a> </p>
-        <p>Our Email: <a href ="mailto:shazadok1619@gmail.com" style="text-decoration: none;">shazadok1619@gmail.com</a> </p>
+        <p>Our Email: <a href ="mailto:internationalwritersofficial@gmail.com" style="text-decoration: none;">internationalwritersofficial@gmail.com</a> </p>
     </div>
-    <div class="copyright"> 
-        <p>
-        ©
-        <script>document.write(new Date().getFullYear())</script> || INTERNATIONALWRITERS
-        </p>
-        </div>
-  </div>
 
+  </div>
+  <div class="copyright"> 
+    <p>
+    ©
+    <script>document.write(new Date().getFullYear())</script> || INTERNATIONALWRITERS
+    </p>
+    </div>
+</div>
 <!-- training -->
 
 <div id="training" style="display: none;">
-  <h1>Training</h1>
+ <div class="content-header"> <h1 style="color: aliceblue;">Training</h1>
+    <p class="due" style="color: brown;">DUE IN:</p></div>
+  <div class="border">
   <section id="guidelines">
       <h2>Training Guidelines:</h2>
       <ul>
@@ -229,6 +250,7 @@
           <li>Each training module costs 100 KSH.</li>
           <li>Track your progress using the progress bar.</li>
           <li>New training modules are added weekly.</li>
+          <li>For assistance, call our customer service at <strong>+254115223085</strong>.</li>
       </ul>
   </section>
 
@@ -291,6 +313,7 @@
           </div>
       </div>
   </div>
+  </div>
 </div>
 
 <script>
@@ -351,8 +374,10 @@
 <!-- availableTasks -->
 
   <div id="availableTasks" style="display:none;">
-    <h1>Available Tasks</h1>
-    
+    <div class="content-header"> <h1 style="color: aliceblue;">Available Tasks</h1>
+        <p class="due" style="color: brown;">DUE IN:</p>
+    </div>
+    <div class="border">
     <div class="task-details">
         <p>Hello User,</p>
         <p>✔Choose a task of your capability and bid</p>
@@ -811,7 +836,7 @@
     <p>Task bid successfully!</p>
     <button onclick="cancelBid('bidConfirmation37')">Cancel Bid</button>
 </div>
-
+</div>
 </div>
 
 </div>
@@ -820,7 +845,9 @@
 
   <!-- submissionPanel -->
   <div id="submissionPanel" style="display:none;" >
-    <h1>Submission Panel</h1>
+    <div class="content-header"> <h1 style="color: aliceblue;">Submission Panel</h1>
+        <p class="due" style="color: brown;">DUE IN:</p></div>
+    <div class="border">
     <div class="submission">
         <h2>Upload a PDF File</h2>
         <p><b>Note:</b> Only PDF files are accepted!</p>
@@ -830,10 +857,13 @@
         </form>
         <div id="message"></div>
     </div>
+    </div>
 </div>
   <!-- withdrawFunds -->
   <div id="withdrawFunds" style="display:none;">
-    <h1>Withdraw Funds</h1>
+    <div class="content-header"> <h1 style="color: aliceblue;">Withdraw Funds</h1>
+        <p class="due" style="color: brown;">DUE IN:</p></div>
+    <div class="border">
     <div class="withdraw">
 
         <h2>Account Balance: KSH<span id="balance">500.00</span></h2>
@@ -852,12 +882,14 @@
           </ul>
         </div>
       </div>
-    
+    </div>
   </div>
 
   <!-- upgradeToPremium -->
   <div id="upgradeToPremium" style="display:none;">
-    <h3>Upgrade to Premium</h3>
+    <div class="content-header"> <h1 style="color: aliceblue;">Upgrade To Premium</h1>
+        <p class="due" style="color: brown;">DUE IN:</p></div>
+    <div class="border">
     <div class="premium">
         <section class="upgrade">
             <p>By upgrading to premium, your account status changes from basic to premium. The advantages of premium are:</p>
@@ -898,11 +930,14 @@
             <input type="button" value="Upgrade Account" style="font-size: medium;" onclick="verifyMpesaCode()" class="verify">
             <div id="verificationMessage"></div>
         </section>
+        </div>
     </div>
 </div>
    <!-- Referral section -->
   <div id="referralProgram" style="display:none;">
-    <h1>Refferal program</h1>
+    <div class="content-header"> <h1 style="color: aliceblue;">Referral Program</h1>
+        <p class="due" style="color: brown;">DUE IN:</p></div>
+    <div class="border">
     <div class="information-section">
         
         <h2>How it works</h2>
@@ -929,12 +964,15 @@
             <input type="text" id="textToCopy" readonly>
             <button onclick="copyText()">Copy Code</button>
         </form>
+        </div>
     </div>
   </div>
 
   <!-- Special Training section -->
   <div id="specialTraining" style="display:none;">
-    <h1>Special Training</h1>
+    <div class="content-header"> <h1 style="color: aliceblue;">Special Training</h1>
+        <p class="due" style="color: brown;">DUE IN:</p></div>
+    <div class="border">
     <section class="training">
         <h2>How does special Training work?</h2>
         <p>The objectives of special training is to enhance your writing skills through dedicated training and practise examples.<br> The duration spans one week,you will be linked to one of our best writers who will conduct a google class with you.
@@ -952,10 +990,14 @@
         </ol>
         </section>
   </div>
+</div>
+
   <div id="profile" style="display:none;">
-    <h3>Profile Section</h3>
+    <div class="content-header"> <h1>Profile Section</h1></div>
+   <div class="border">
     <p>This is the profile section.</p>
   </div>
+</div>
 </div>
 
 <script src="js/script.js"></script>

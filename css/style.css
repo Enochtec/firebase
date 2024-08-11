@@ -3,8 +3,20 @@ body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
     background-color: #dcdcee;
+    margin: 0;
+    padding: 0;
   }
   
+  .border {
+      display: block;
+      padding: 20px;
+      background-color: #e9eaeb;
+      max-width: 800px;
+      margin: 20px auto;
+      margin-top: 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
   .sidenav {
     height: 100%;
     max-width: fit-content;
@@ -15,25 +27,29 @@ body {
     background-color: #a6acb3;
     overflow-x: hidden;
     transition: 0.5s;
+    border-right: 2px solid rgb(101, 126, 209);
     padding-top: 40px;
     margin-top: 30px;
   }
   
   .sidenav a {
-    /* padding: 8px 8px 8px 32px; */
+    padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #0e0b11;
+    color: #392d46;
     display: block;
     transition: 0.3s;
-    padding: 10px 20px;
+    padding: 5px;
       margin-bottom: 5px;
       margin-top: 20px;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 15px;
       padding-left: 30px;
   }
   
+  .material-icons {
+    font-size: 8px;
+  }
   
   .sidenav a:hover {
     color: #e0dee7;
@@ -65,14 +81,90 @@ body {
   .header {
       background-color: #008080;
       color: #ffffff;
-      padding: 10px 0;
+      padding: 12px  0;
       position: fixed; /* Fixed position */
       top: 0; /* Fixed to the top */
       left: 0; /* Fixed to the left */
       width: 100%; /* Full width */
       z-index: 2;
+      margin: 0;
   }
-  
+  .top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-toggle {
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 8px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+  }
+  .dropdown-toggle:hover{
+    background-color: #bdb9b9;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: opx 8px 16px opx rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 8px;
+  }
+  .dropdown-content a {
+    color: #443255;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0,3s ease;
+  }
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+  .dropdown-content a:hover {
+    background-color: #b4aebe;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4b5c;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 8px;
+    font-weight: bold;
+  }
+  .content-header {
+background-image: url(../bg.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+width: 100%;
+min-height: 6vh;
+left: 0;
+margin: 0;
+background-position: top;
+  }
+  .content-header p {
+    display: flex;
+    padding-left: 40px;
+  }
+
   .container {
       display: flex;
       justify-content: space-between;
@@ -82,8 +174,9 @@ body {
   }
   
   .logo img {
-      width: 40px;
-      border-radius: 10px;
+      width: 60px;
+      height: 5vh;
+      border-radius: 45%;
   }
   
   .welcome-message {
@@ -96,27 +189,19 @@ body {
       width: 40px;
       border-radius: 10px;
   }
-  h1 {
-    background-color: rgb(177, 162, 162);
+
+  h1 { 
+    margin-top: 0;
+    padding:  0 10px;
   }
+ 
   /* dashboard */
-  h3{
-      background-color: #84d19d;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
   
   .dashboard-content {
-      background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     border-radius: 8px;
       padding: 20px;
-  }
-  
-  .dashboard h1 {
-      color: #333;
-      margin-bottom: 20px;
   }
   
   .user-info {
@@ -126,9 +211,10 @@ body {
   }
   
   .info-block {
-      background-color: #7968b4;
+      background-color: #4ed460;
       padding: 10px;
       border-radius: 5px;
+      border-left: 2px solid rgb(30, 163, 90);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
@@ -139,26 +225,21 @@ body {
   
   .info-block p {
       margin: 0;
-      color: #acacb1;
+      color: #e9f0ed;
   }
   .countdown{
-      background-color: #16e6f5;
-      padding: 20px;
-      border: 5px solid #9c9aa3;
-    border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      display: grid;
+      display: flex;
       justify-items: center;
+      padding-left: 10px;
       align-items: center;
       font-size: 20px;
       color: red;
   }
   
   .activate{
-      background-color:  #dfe2e2;
+    background-color: #e0e7ec;
       padding-left: 10%;
-      border: 5px solid #9c9aa3;
+      border:1px solid #cccbcf;
     border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
@@ -173,15 +254,18 @@ body {
       justify-items: center;
       align-items: center;
       font-size: 20px;
-      border: 5px solid #69686d;
+      border:1px solid #cccbcf;
       background-color: #4c4b5f;
       color: rgb(41, 40, 40);
+      width: 100%;
+      bottom: 0;
+      margin: 0;
   }
   
   .conduct{
-      background-color: #dfe2e2;
+    background-color: #e0e7ec;
       padding: 20px;
-      border: 5px solid #9c9aa3;
+      border:1px solid #cccbcf;
     border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
@@ -191,10 +275,10 @@ body {
   }
   /* withdraw */
   .withdraw {
-    max-width: 400px;
+    /* max-width: 400px; */
     margin: 0 auto;
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -254,8 +338,8 @@ body {
   .submission {
     max-width: 600px;
     margin: 0 auto;
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -315,45 +399,34 @@ body {
       position: relative;
   }
   
-  .premium {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(228, 228, 243);
-  }
   .upgrade{
-      background-color: aquamarine;
+      background-color: rgb(136, 248, 239);
       margin-bottom: 30px;
       max-width: fit-content;
       padding: 10px;
-      border: 5px solid #a9c8ca;
+      border:1px solid #cccbcf;
       border-radius: 8px;
   }
   .upgrade ol li{
       list-style-type: disc;
   }
   
-  h1,h2 {
-    text-align: center;
-  }
-  
   #howToPay{
     margin-bottom: 30px;
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    padding: 10px;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     border-radius: 8px;
   }
   #guidelines{
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     border-radius: 8px;
       margin-bottom: 30px;
   }
   #transactionCode{
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     border-radius: 8px;
       margin-bottom: 30px;
       padding: 20px;
@@ -413,18 +486,18 @@ body {
   }
   
   .information-section {
-    background:rgb(218, 217, 221);
-    border: 5px solid #9c9aa3;
+    background-color: #e0e7ec;
+    border:1px solid #cccbcf;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
   }
   
   .referral-section {
-    border: 5px solid #9c9aa3;
+    border:1px solid #cccbcf;
     padding: 20px;
     border-radius: 8px;
-    background:rgb(218, 217, 221);
+    background-color: #e0e7ec;
   }
   
   h1, h2 {
@@ -476,8 +549,9 @@ body {
           background-color: beige;
       }
       .training{
-        background:rgb(218, 217, 221);
-        border: 5px solid #9c9aa3;
+        background-color: #e0e7ec;
+        border:1px solid #cccbcf;
+        border-radius: 4px;
           margin-bottom: 20px;
           padding: 20px;
       }
@@ -488,23 +562,9 @@ body {
       }
 
       /* training */
-
-     
-      #training {
-        display: block;
-        padding: 20px;
-        background-color: #fff;
-        max-width: 800px;
-        margin: 20px auto;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    #guidelines {
+      background-color: rgb(136, 248, 239);
     }
-
-    #training h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
     .training-module {
         background-color: #e9f5ff;
         border-left: 5px solid #2196F3;
@@ -604,7 +664,7 @@ body {
       /* tasks */
       
   .task-details {
-      background-color: #927bca;
+    background-color: rgb(136, 248, 239);
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -629,21 +689,21 @@ body {
   }
   
   .task {
-      background-color:rgb(185, 189, 189);
+    background-color: #e0e7ec;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .task h3 {
-      color: #333;
+      color: #2e0472;
       margin-bottom: 10px;
-      background-color: rgb(135, 121, 201);
+      left: 2px;
   }
   
   .task p {
       margin: 0;
-      color: #666;
+      color: #313030;
       font-size: 14px;
   }
   
@@ -661,9 +721,10 @@ body {
   /* Add this CSS to your existing styles.css file or create a new one */
   .task {
       margin-bottom: 20px;
-      background:rgb(218, 217, 221);
-      border: 5px solid #9c9aa3;
-      border-radius: 8px;
+      background-color: #e0e7ec;
+          border:1px solid #cccbcf;
+          border-left: 5px solid #2196F3;
+      border-radius: 5px;
       padding: 10px;
       position: relative;
   }
