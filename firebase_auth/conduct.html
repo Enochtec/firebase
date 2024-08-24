@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code of Conduct Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo {
+            display: block;
+            max-width: 150px;
+            margin: 0 auto 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea {
+            width: calc(100% - 24px);
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            font-size: 16px;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo here -->
+    <h2>Code of Conduct Form</h2>
+    <form id="conductForm" action="#" method="post">
+        <label for="name"><b>Your Name:</b></label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="email"><b>Your Email:</b></label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+        <label for="incident_date"><b>Date of Incident:</b></label>
+        <input type="date" id="incident_date" name="incident_date" required>
+
+        <label for="description"><b>Incident Description:</b></label>
+        <textarea id="description" name="description" placeholder="Describe the incident" rows="6" required></textarea>
+
+        <label for="witnesses"><b>Witnesses (Optional):</b></label>
+        <input type="text" id="witnesses" name="witnesses" placeholder="Enter names of any witnesses">
+
+        <label for="feedback"><b>Feedback or Suggestions:</b></label>
+        <textarea id="feedback" name="feedback" placeholder="Your feedback or suggestions" rows="6"></textarea>
+
+        <button type="submit" id="submit_conduct"><b>Submit</b></button>
+    </form>
+</div>
+
+<div class="copyright">
+    <p>
+        ©
+        <script>document.write(new Date().getFullYear())</script> | INTERNATIONAL WRITERS
+    </p>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("conductForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var incidentDate = document.getElementById("incident_date").value;
+            var description = document.getElementById("description").value;
+            var witnesses = document.getElementById("witnesses").value;
+            var feedback = document.getElementById("feedback").value;
+
+            // Perform validation (example)
+            if (name === "" || email === "" || incidentDate === "" || description === "") {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            // Here you can handle the form data (e.g., send it to the server or store it)
+            console.log("Name:", name);
+            console.log("Email:", email);
+            console.log("Incident Date:", incidentDate);
+            console.log("Description:", description);
+            console.log("Witnesses:", witnesses);
+            console.log("Feedback:", feedback);
+
+            alert("Your submission has been received successfully.");
+
+            // Reset the form after submission
+            document.getElementById("conductForm").reset();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <!-- <button id="logout" class="logout-button">Logout</button> -->
+
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                
+            </div>
+            
+            <div id="welcomeMessage"></div>
+            <div class="top-right">
+                <div class="dropdown">
+                    <div class="dropdown-toggle">
+                        <i class="fas fa-bell"></i>
+                        <div class="notification-count">0</div>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="javascript:void(0);" onclick="toggleNotifications()">
+                            <i class="fas fa-bell"></i> Notifications
+                            <div class="notification-count">0</div>
+                        </a>
+                        <a href="login.html">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Notification Panel -->
+                <div id="notificationPanel" class="notification-panel" style="display:none;">
+                    <h3>Notifications</h3>
+                    <ul>
+                        <li>You have some new tasks.</li>
+                        <li>Your submission has been approved.</li>
+                        <li>New message from admin.</li>
+                        <!-- Add more notifications as needed -->
+                    </ul>
+                </div>
+                
+            </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Get the user's name from local storage
+      const userName = localStorage.getItem('userName');
+
+      // Display the welcome message
+      if (userName) {
+          document.getElementById('welcomeMessage').innerText = `Welcome, ${userName}!`;
+      } else {
+          document.getElementById('welcomeMessage').innerText = `Welcome!`;
+      }
+  });
+</script>
+
+     
+            <div class="profile">
+                <!-- <img src="logo.png" alt="Profile"> -->
+            </div>
+        </div>
+        
+    </div>
+    <!-- <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      document.getElementById('username').textContent = username;
+    </script> -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <a href="#" onclick="openSection('dashboard')">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      
+        <a href="#" onclick="openSection('training')">
+          <i class="fas fa-graduation-cap"></i> Training
+        </a>
+      
+        <a href="#" onclick="openSection('availableTasks')">
+          <i class="fas fa-tasks"></i> Available Tasks
+        </a>
+      
+        <a href="#" onclick="openSection('submissionPanel')">
+          <i class="fas fa-cloud-upload-alt"></i> Submission Panel
+        </a>
+      
+        <a href="#" onclick="openSection('withdrawFunds')">
+          <i class="fas fa-money-bill-alt"></i> Withdraw Funds
+        </a>
+      
+        <a href="#" onclick="openSection('upgradeToPremium')">
+          <i class="fas fa-star"></i> Upgrade to Premium
+        </a>
+      
+        <a href="#" onclick="openSection('referralProgram')">
+          <i class="fas fa-users"></i> Referral Program
+        </a>
+      
+        <a href="#" onclick="openSection('specialTraining')">
+          <i class="fas fa-id-badge"></i> Special Training
+        </a>
+      
+        <!-- Logout link -->
+        <a href="#" id="logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+    
+<div id="main">
+    
+  <div id="dashboard" >
+     <div class="content-header"><h1 style="color: aliceblue;">Dashboard</h1>
+        <div class="countdown">
+            <p style="color: aliceblue;">Countdown To Launching: </p>
+            <p id="demo">Countdown to Launching</p>
+        </div>
+    </div>
+    <div class="border">
+      <div class="dashboard-content">
+        <div class="user-info">
+            <div class="info-block">
+                <h4>USERNAME</h4>
+                <p><span id="name"></span></p>
+            </div>
+            <div class="info-block">
+                <h4>EMAIL</h4>
+                <p><span id="user"></span></p>
+            </div>
+            
+            <script type="module">
+                // Import the Firebase functions you need from the SDKs
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+                import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+                import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+            
+                // Firebase configuration
+                const firebaseConfig = {
+                    apiKey: "AIzaSyB6PIBb6GvXFaE0ZX9XS2r-8e5mYN5FifM",
+                    authDomain: "writerzkenya.firebaseapp.com",
+                    projectId: "writerzkenya",
+                    storageBucket: "writerzkenya.appspot.com",
+                    messagingSenderId: "609044591883",
+                    appId: "1:609044591883:web:39119609a075ee90e15e0e",
+                    measurementId: "G-NG87JBENW4"
+                };
+            
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const analytics = getAnalytics(app);
+                const auth = getAuth();
+            
+                // Wait for the DOM to fully load
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Check the authentication state
+                    onAuthStateChanged(auth, (user) => {
+                        if (user) {
+                            // User is signed in, retrieve and display the user's name and email
+                            const userName = user.displayName || "No Name Set";
+                            const userEmail = user.email;
+            
+                            document.getElementById('name').innerText = userName;
+                            document.getElementById('user').innerText = userEmail;
+                        } else {
+                            // User is not signed in, display a default message
+                            document.getElementById('name').innerText = "Not Logged In";
+                            document.getElementById('user').innerText = "Not Logged In";
+                        }
+                    });
+            
+                    // Add logout functionality
+                    document.getElementById("logout").addEventListener("click", function() {
+                        signOut(auth).then(() => {
+                            alert("Logout successful!");
+                            window.location.href = "login.html";
+                        }).catch((error) => {
+                            console.error("Error during logout:", error);
+                            alert("Error during logout: " + error.message);
+                        });
+                    });
+                });
+            </script>
+            
+            
+          <div class="info-block">
+              <h4>ACCOUNT STATUS</h4>
+              <p>INACTIVE</p>
+          </div>
+          <div class="info-block">
+              <h4>CURRENT BALANCE</h4>
+              <p>KSH 0</p>
+          </div>
+          <div class="info-block">
+              <h4>TOTAL MONEY IN</h4>
+              <p>KSH 0</p>
+          </div>
+          <div class="info-block">
+              <h4>TOTAL WITHDRAWALS</h4>
+              <p>KSH 0</p>
+          </div>
+      </div>
+  
+      <script>
+          // Extract the username from the URL query parameter
+          const urlParams = new URLSearchParams(window.location.search);
+          const username = urlParams.get('username');
+          
+          if (username) {
+              document.getElementById('username').textContent = username;
+              document.getElementById('user').textContent = username;
+              document.getElementById('name').textContent = username; // Assuming name is the same as username
+          }
+      </script>
+
+      </div>
+
+    <div class="activate">
+        <h4 style="text-align: center; color: #29196e;">HOW TO ACTIVATE YOUR ACCOUNT</h4>
+        <p style='color:red;' >NOTE:Account activation is ONLY via  pochi la biashara </p>
+        <p>Follow the procedures below to activate your account</p>
+        <p>Go to lipa na mpesa</p>
+        <p>Buy Goods Till Number: <b>4277276</b></p>
+        <p>Amount <b>KSH.500</b></p>
+        <p>Enter M-pesa pin to complete the transaction (Zadock)</p>
+        <p>Once done,copy the M-PESA code(i.e QL72N6QO2G)</p>
+        <p>And <a href="#" style="text-decoration: none;">Click Here</a> paste the code to activate your account instantly.</p>
+    </div>
+    <div class="conduct">
+        <h4>YOU CAN FIND US:</h4>
+        <p>Telegram Channel: <a href="t.me:" style="text-decoration: none;">Click to Join.</a> </p>
+        <p>Our Email: <a href ="mailto:internationalwritersofficial@gmail.com" style="text-decoration: none;">internationalwritersofficial<br>@gmail.com</a> </p>
+    </div>
+    <div class="copyright"> 
+        <p>
+        ©
+        <script>document.write(new Date().getFullYear())</script> || INTERNATIONALWRITERS
+        </p>
+  </div>
+  </div>
+  </div>
+<!-- training -->
+
+<div id="training" style="display: none;">
+ <div class="content-header"> <h1 style="color: aliceblue;">Training</h1>
+    <p class="due" style="color: rgb(248, 247, 247);">DUE IN:</p></div>
+  <div class="border">
+  <section id="guidelines">
+      <h2>Training Guidelines:</h2>
+      <ul>
+          <li>Complete each training module to enhance your skills.</li>
+          <li>Each training module costs 100 KSH.</li>
+          <li>Track your progress using the progress bar.</li>
+          <li>New training modules are added weekly.</li>
+          <li>For assistance, call our customer service at <strong>+254115223085</strong>.</li>
+      </ul>
+  </section>
+
+  <div class="training-module" id="module-1">
+      <span class="price">100 KSH</span>
+      <h3>Training Module 1: Basics of Writing</h3>
+      <p>Learn the fundamentals of writing, including grammar, structure, and style.</p>
+      <button onclick="startTraining(1)">Start Training</button>
+      <div class="progress">
+          <div class="progress-bar" id="progress-bar-1">
+              <span class="progress-text" id="progress-text-1">0%</span>
+          </div>
+      </div>
+  </div>
+
+  <div class="training-module" id="module-2">
+      <span class="price">100 KSH</span>
+      <h3>Training Module 2: Advanced Writing Techniques</h3>
+      <p>Explore advanced writing techniques to improve your writing skills.</p>
+      <button onclick="startTraining(2)" disabled>Start Training</button>
+      <div class="progress">
+          <div class="progress-bar" id="progress-bar-2">
+              <span class="progress-text" id="progress-text-2">0%</span>
+          </div>
+      </div>
+  </div>
+
+  <div class="training-module" id="module-3">
+      <span class="price">100 KSH</span>
+      <h3>Training Module 3: SEO Writing</h3>
+      <p>Understand the principles of SEO and how to apply them to your writing.</p>
+      <button onclick="startTraining(3)" disabled>Start Training</button>
+      <div class="progress">
+          <div class="progress-bar" id="progress-bar-3">
+              <span class="progress-text" id="progress-text-3">0%</span>
+          </div>
+      </div>
+  </div>
+
+  <div class="training-module" id="module-4">
+      <span class="price">100 KSH</span>
+      <h3>Training Module 4: Writing for Social Media</h3>
+      <p>Learn how to craft engaging content for various social media platforms.</p>
+      <button onclick="startTraining(4)" disabled>Start Training</button>
+      <div class="progress">
+          <div class="progress-bar" id="progress-bar-4">
+              <span class="progress-text" id="progress-text-4">0%</span>
+          </div>
+      </div>
+  </div>
+
+  <div class="training-module" id="module-5">
+      <span class="price">100 KSH</span>
+      <h3>Training Module 5: Copywriting</h3>
+      <p>Master the art of persuasive writing to effectively sell products and ideas.</p>
+      <button onclick="startTraining(5)" disabled>Start Training</button>
+      <div class="progress">
+          <div class="progress-bar" id="progress-bar-5">
+              <span class="progress-text" id="progress-text-5">0%</span>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  const moduleStatus = {};
+
+  // Function to start training
+  function startTraining(moduleNumber) {
+      if (moduleNumber > 1 && !moduleStatus[moduleNumber - 1]) {
+          showAlert(`Complete Module ${moduleNumber - 1} before starting Module ${moduleNumber}.`, 'error');
+          return;
+      }
+
+      const progressBar = document.getElementById(`progress-bar-${moduleNumber}`);
+      const progressText = document.getElementById(`progress-text-${moduleNumber}`);
+      const nextModuleButton = document.querySelector(`#module-${moduleNumber + 1} button`);
+      
+      let progress = 0;
+      moduleStatus[moduleNumber] = false;
+      showAlert(`Training Module ${moduleNumber} has started.`, 'success');
+
+      const progressInterval = setInterval(() => {
+          if (progress >= 100) {
+              clearInterval(progressInterval);
+              moduleStatus[moduleNumber] = true;
+              showAlert(`Training Module ${moduleNumber} completed!`, 'success');
+              if (nextModuleButton) {
+                  nextModuleButton.disabled = false; // Enable the next module button
+              }
+          } else {
+              progress += (100 / (7 * 24 * 60 * 60)); // Increase progress over one week
+              progressBar.style.width = `${progress}%`;
+              progressText.textContent = `${Math.floor(progress)}%`;
+          }
+      }, 1000); // Update progress every second
+  }
+
+  function showAlert(message, type) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = `alert alert-${type}`;
+      alertDiv.innerHTML = message + `<span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>`;
+      document.getElementById('training').prepend(alertDiv);
+
+      setTimeout(() => {
+          if (alertDiv) {
+              alertDiv.style.display = 'none';
+          }
+      }, 5000); // Auto close after 5 seconds
+  }
+</script>
+<!-- <ul>
+  <li><b>Note:</b> you have to pay a training fee of Ksh 500.</li>
+  <li>Pochi la Biashara Number:+254115223085</li>
+  <li>Ensure you enter the correct number</li>
+  <li>After payment you will start training immediately</li>
+  <li>For assistance, call our customer service at <strong>+254115223085</strong>.</li>
+</ul> -->
+
+<!-- availableTasks -->
+
+  <div id="availableTasks" style="display:none;">
+    <div class="content-header"> <h1 style="color: aliceblue;">Available Tasks</h1>
+        <p class="due" style="color: rgb(247, 245, 245);">DUE IN:</p>
+    </div>
+    <div class="border">
+    <div class="task-details">
+        <p>Hello User,</p>
+        <p>✔Choose a task of your capability and bid</p>
+        <p><span>(</span> Kindly check due date before bidding <span>)</span></p>
+    </div>
+
+
+<div class="task-info">
+    <div class="task">
+        <h3>FIELD: HEALTH, DIET AND FITNESS</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Discuss the various outcomes of eating unhealthy food, and most effective ways of improving the eating habits, in 3.5 pages</p>
+        <p><strong>KSH 300</strong> <span>BID AWARDED</span></p>
+    </div>
+    
+    <div class="task">
+        <h3>FIELD: BUSINESS AND CULTURE</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Discuss the risks of increasing business and cultural contacts between nations, in 3.5 pages</p>
+        <p>KSH 250</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation1')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation1" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation1')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: FINANCE</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Discuss pros and cons of cashless economy, in 4 pages excluding the cover page.</p>
+        <p>KSH 150</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation2')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation2" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation2')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: FASHION AND DESIGN</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Write an essay on influence of culture in Global culture consumerism. In 4 pages normal spaced.</p>
+        <p>KSH 300</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation3')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation3" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation3')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: AGRICULTURE</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Write an essay on impacts of crop pesticides on human health, in 5 pages excluding cover page.</p>
+        <p>KSH 200</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation4')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation4" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation4')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: WORK</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Discuss the impacts of compensation on employees morale, in 5 pages.</p>
+        <p>KSH 500</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation5')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation5" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation5')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: ECONOMICS</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Write a report on why might an economy experience disequilibrium, in 4 pages.</p>
+        <p>KSH 200</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation6')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation6" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation6')">Cancel Bid</button>
+    </div>
+
+    <div class="task">
+        <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+        <p class="due" style="color: brown;">DUE IN:</p>
+        <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+        <p>KSH 250</p>
+        <button class="bid-button" onclick="bidTask('bidConfirmation7')">BID TASK</button>
+    </div>
+    <div id="bidConfirmation7" style="display: none;">
+        <p>Task bid successfully!</p>
+        <button onclick="cancelBid('bidConfirmation7')">Cancel Bid</button>
+    </div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation8')">BID TASK</button>
+</div>
+<div id="bidConfirmation8" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation8')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation9')">BID TASK</button>
+</div>
+<div id="bidConfirmation9" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation9')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation10')">BID TASK</button>
+</div>
+<div id="bidConfirmation10" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation10')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation11')">BID TASK</button>
+</div>
+<div id="bidConfirmation11" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation11')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation12')">BID TASK</button>
+</div>
+<div id="bidConfirmation12" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation12')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation13')">BID TASK</button>
+</div>
+<div id="bidConfirmation13" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation13')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation14')">BID TASK</button>
+</div>
+<div id="bidConfirmation14" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation14')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation15')">BID TASK</button>
+</div>
+<div id="bidConfirmation15" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation15')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation16')">BID TASK</button>
+</div>
+<div id="bidConfirmation16" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation16')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation17')">BID TASK</button>
+</div>
+<div id="bidConfirmation17" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation17')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation18')">BID TASK</button>
+</div>
+<div id="bidConfirmation18" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation18')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation19')">BID TASK</button>
+</div>
+<div id="bidConfirmation19" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation19')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation20')">BID TASK</button>
+</div>
+<div id="bidConfirmation20" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation20')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation21')">BID TASK</button>
+</div>
+<div id="bidConfirmation21" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation21')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation22')">BID TASK</button>
+</div>
+<div id="bidConfirmation22" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation22')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation23')">BID TASK</button>
+</div>
+<div id="bidConfirmation23" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation23')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation24')">BID TASK</button>
+</div>
+<div id="bidConfirmation24" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation24')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation25')">BID TASK</button>
+</div>
+<div id="bidConfirmation25" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation25')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation26')">BID TASK</button>
+</div>
+<div id="bidConfirmation26" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation26')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation27')">BID TASK</button>
+</div>
+<div id="bidConfirmation27" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation27')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation28')">BID TASK</button>
+</div>
+<div id="bidConfirmation28" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation28')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation29')">BID TASK</button>
+</div>
+<div id="bidConfirmation29" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation29')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation30')">BID TASK</button>
+</div>
+<div id="bidConfirmation30" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation30')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation31')">BID TASK</button>
+</div>
+<div id="bidConfirmation31" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation31')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation32')">BID TASK</button>
+</div>
+<div id="bidConfirmation32" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation32')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation33')">BID TASK</button>
+</div>
+<div id="bidConfirmation33" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation33')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation34')">BID TASK</button>
+</div>
+<div id="bidConfirmation34" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation34')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation35')">BID TASK</button>
+</div>
+<div id="bidConfirmation35" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation35')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation36')">BID TASK</button>
+</div>
+<div id="bidConfirmation36" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation36')">Cancel Bid</button>
+</div>
+
+<div class="task">
+    <h3>FIELD: INFORMATION TECHNOLOGY</h3>
+    <p class="due" style="color: brown;">DUE IN:</p>
+    <p>CONTEXT: Information technology is changing many aspects of our lives and now dominates our home, leisure and even work. Describe both its advantages and disadvantages, in 4 pages</p>
+    <p>KSH 250</p>
+    <button class="bid-button" onclick="bidTask('bidConfirmation37')">BID TASK</button>
+</div>
+<div id="bidConfirmation37" style="display: none;">
+    <p>Task bid successfully!</p>
+    <button onclick="cancelBid('bidConfirmation37')">Cancel Bid</button>
+</div>
+</div>
+</div>
+
+</div>
+  
+  
+
+  <!-- submissionPanel -->
+  <div id="submissionPanel" style="display:none;" >
+    <div class="content-header"> <h1 style="color: aliceblue;">Submission Panel</h1>
+        <p class="due" style="color: rgb(245, 241, 241);">DUE IN:</p></div>
+    <div class="border">
+    <div class="submission">
+        <h2>Upload a PDF File</h2>
+        <p><b>Note:</b> Only PDF files are accepted!</p>
+        <form id="pdfForm" enctype="multipart/form-data">
+            <input type="file" id="pdfFile" accept=".pdf" required>
+            <button type="submit">Upload</button>
+        </form>
+        <div id="message"></div>
+    </div>
+    </div>
+</div>
+  <!-- withdrawFunds -->
+  <div id="withdrawFunds" style="display:none;">
+    <div class="content-header"> <h1 style="color: aliceblue;">Withdraw Funds</h1>
+        <p class="due" style="color: rgb(247, 242, 242);">DUE IN:</p></div>
+    <div class="border">
+    <div class="withdraw">
+
+        <h2>Account Balance: KSH<span id="balance">500.00</span></h2>
+        <p>Withdrawals are instantly credited to your <b>M-pesa</b> account</p>
+        <form id="withdrawForm">
+          <label for="withdrawAmount">Withdraw Amount:</label>
+          <input type="number" id="withdrawAmount" name="withdrawAmount" min="0" required>
+          <button type="submit">Withdraw</button>
+        </form>
+        <div id="withdrawals">
+          <h3>Total Withdrawals Made:</h3>
+          <p>Withdrawals are dispayed here!</p>
+          <h5>Withdrawals made:</h5>
+          <ul id="withdrawList">
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- upgradeToPremium -->
+  <div id="upgradeToPremium" style="display:none;">
+    <div class="content-header"> <h1 style="color: aliceblue;">Upgrade To Premium</h1>
+        <p class="due" style="color: rgb(243, 240, 240);">DUE IN:</p></div>
+    <div class="border">
+    <div class="premium">
+        <section class="upgrade">
+            <p>By upgrading to premium, your account status changes from basic to premium. The advantages of premium are:</p>
+            <ol>
+                <li>You can select more than one task per day</li>
+                <li>Taken tasks are eliminated from your account, you are left with untaken only</li>
+                <li>More tasks are posted in Premium level than basic level</li>
+            </ol>
+        </section>
+        
+        <section id="howToPay">
+            <h2>How to Upgrade:</h2>
+            <p>To pay with M-Pesa, follow these steps:</p>
+            <ol>
+                <li>Go to your M-Pesa menu on your phone.</li>
+                <li>Select "Lipa na M-Pesa".</li>
+                <li>Choose "Buy Goods".</li>
+                <li>Buy Goods Till Number: <strong>4277276</strong></li>
+                <li>Enter the amount: <strong>500</strong></li>
+                <li>Enter your M-Pesa PIN and confirm the transaction. <b>Zadock</b></li>
+            </ol>
+        </section>
+        
+        <section id="guidelines">
+            <h2>Payment Guidelines:</h2>
+            <ul>
+                <li>Payments must be made in Kenyan Shillings (KES).</li>
+                <li>Ensure you enter the correct number.</li>
+                <li>Transactions may take a few minutes to reflect on your account.</li>
+                <li>For assistance, call our customer service at <strong>+254115223085</strong>.</li>
+            </ul>
+        </section>
+
+        <section id="transactionCode">
+            <h2>Transaction Code:</h2>
+            <p>Copy and Paste your transaction code to verify payment:</p>
+            <input type="text" class="code" id="mpesaCode" placeholder="enter M-Pesa code i.e QWRSSWFT" required><br>
+            <input type="button" value="Upgrade Account" style="font-size: medium;" onclick="verifyMpesaCode()" class="verify">
+            <div id="verificationMessage"></div>
+        </section>
+        </div>
+    </div>
+</div>
+   <!-- Referral section -->
+  <div id="referralProgram" style="display:none;">
+    <div class="content-header"> <h1 style="color: aliceblue;">Referral Program</h1>
+        <p class="due" style="color: rgb(247, 243, 243);">DUE IN:</p></div>
+    <div class="border">
+    <div class="information-section">
+        
+        <h2>How it works</h2>
+        <p>To qualify for our refferal program you must have an active account at our website.<br> Just follow the following steps
+        </p>
+        <ol>
+            <li>Log in to you account, click on navigation bar and select referral program</li>
+            <li>Copy the application link with a unicode code</li>
+            <li>Promote our businness to your friends and invite them to join INTERNATIONALWRITERS via your personal link</li>
+            <li>Get 10% of each order submitted assignment by your referrals.</li>
+    
+      </div>
+     
+      <!-- <div class="referral-section">
+        <h2>Enter Referral Code</h2>
+        <form id="referralForm">
+          <input type="text" id="referralCode" placeholder="Enter your referral code...">
+          <button type="submit">Verify</button>
+        </form>
+      </div> -->
+      <div class="referral-section">
+        <h2>Your Referral Code</h2>
+        <form id="referralForm" onsubmit="return false;">
+            <input type="text" id="textToCopy" readonly>
+            <button onclick="copyText()">Copy Code</button>
+        </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Special Training section -->
+  <div id="specialTraining" style="display:none;">
+    <div class="content-header"> <h1 style="color: aliceblue;">Special Training</h1>
+        <p class="due" style="color: rgb(30, 245, 2);">DUE IN:</p></div>
+    <div class="border">
+    <section class="training">
+        <h2>How does special Training work?</h2>
+        <p>The objectives of special training is to enhance your writing skills through dedicated training and practise examples.<br> The duration spans one week,you will be linked to one of our best writers who will conduct a google class with you.
+        <br> To optimise your learning experience they will share some of their accepted tasks with you. <br> This examples will serve as valuable refference for you to study.</p>
+        <h2> what are the advantages of special training?</h2>
+        <p> The advantages are:</p>
+        <ol>
+            <li>You will receive training from one of the top earning InternationalWriters, ensuring highly quality instruction.</li>
+            <li>Once trained, you will submit your assignment to your trainee before submitting to our portal.</li>
+            <li>Personal training means you have more direct contact to your trainee, facilitating a more effective learning experience.</li>
+            <li>With training from someone who understands our requirements and guidelines you are guaranteed to earn confidently knowing what to do in our assignments.</li>
+            <h3> The training fee is KSH 1000</h3>
+            <p>Thank you for expressing you interest in special training program, We appreciate your enthusiasm for improving your writting skills.</p>
+            <input type="button" id="spetr" value="Proceed" onclick="pay()" >
+        </ol>
+        </section>
+  </div>
+</div>
+
+  <div id="profile" style="display:none;">
+    <div class="content-header"> <h1>Profile Section</h1></div>
+   <div class="border">
+    <p>This is the profile section.</p>
+  </div>
+</div>
+</div>
+
+<script src="js/script.js"></script>
+   
+</body>
+</html>

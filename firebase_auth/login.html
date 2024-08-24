@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/register.css"> <!-- Shared CSS file -->
+  <style>
+    /* Custom alert styling */
+    .custom-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #64a166;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      z-index: 1000;
+    }
+    .custom-alert.error {
+      background-color: #c2827e;
+    }
+  </style>
+</head>
+<body>
+<div class="header-text">
+    <h3>Welcome Back!</h3>
+  </div>
+<div class="container">
+  <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo here -->
+  <h2 style="color: #9b99a8;"> LOGIN TO YOUR ACCOUNT</h2>
+  <form action="#" method="post">
+    <label for="login_email"><b>Email:</b></label>
+    <input type="text" id="login_email" name="login_email" placeholder="Enter your email" required>
+    
+    <label for="password"><b>Password:</b></label>
+    <input type="password" id="login_password" name="login_password" placeholder="Enter your password" required>
+    
+    <button type="button" id="login" name="login" value="login"><b>Login</b></button>
+  </form>
+  
+  <div class="login-link">
+    <a href="forgot-password.html">Forgot Password?</a>
+    <a href="register.html">Create New Account</a>
+  </div>
+</div>
+
+<div class="custom-alert" id="alert-box"></div>
+
+<div class="copyright">
+  <p>
+  ©
+  <script>document.write(new Date().getFullYear())</script> | INTERNATIONAL WRITERS
+  </p>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyB6PIBb6GvXFaE0ZX9XS2r-8e5mYN5FifM",
+      authDomain: "writerzkenya.firebaseapp.com",
+      projectId: "writerzkenya",
+      storageBucket: "writerzkenya.appspot.com",
+      messagingSenderId: "609044591883",
+      appId: "1:609044591883:web:39119609a075ee90e15e0e",
+      measurementId: "G-NG87JBENW4"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+
+  document.getElementById("login").addEventListener("click", function() {
+      var email = document.getElementById("login_email").value;
+      var password = document.getElementById("login_password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential)=>{
+          const user = userCredential.user;
+
+          // Store the user's display name in local storage
+          localStorage.setItem('userName', user.displayName);
+
+          console.log(user);
+          showAlert("Login successful!", "success");
+          setTimeout(() => {
+            window.location.href = "./dashboard.html";
+          }, 2000); // Redirect after 2 seconds
+      })
+      .catch((error)=>{
+          const errorMessage = customizeErrorMessage(error.code);
+          console.log(errorMessage);
+          showAlert(errorMessage, "error");
+      });
+  });
+
+  function showAlert(message, type) {
+      const alertBox = document.getElementById("alert-box");
+      alertBox.textContent = message;
+      alertBox.className = "custom-alert " + (type === "error" ? "error" : "");
+      alertBox.style.display = "block";
+      setTimeout(() => {
+        alertBox.style.display = "none";
+      }, 3000); // Hide after 3 seconds
+  }
+
+  function customizeErrorMessage(errorCode) {
+      switch (errorCode) {
+          case 'auth/invalid-email':
+              return 'Invalid email address. Please check and try again.';
+          case 'auth/user-disabled':
+              return 'This account has been disabled. Please contact support.';
+          case 'auth/user-not-found':
+              return 'No account found with this email. Please sign up.';
+          case 'auth/wrong-password':
+              return 'Incorrect password. Please try again.';
+          default:
+              return 'Incorrect credentials. Please try again.';
+      }
+  }
+</script>
+
+</body>
+</html>
