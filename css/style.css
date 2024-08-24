@@ -98,16 +98,16 @@ body {
     position: relative;
     display: inline-block;
   }
-  /* .dropdown-toggle {
-    /* background-color: #fff; */
-    /* color: #333;
+   /* .dropdown-toggle {
+    background-color: #fff; 
+    color: #333;
     padding: 10px;
-    border-radius: 50%; */
-    /* cursor: pointer; */
-    /* font-size: 8px;
-    border: 1px solid #ccc; */
-    /* transition: background-color 0.3s ease;
-  } */ */
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 8px;
+    border: 1px solid #ccc;
+     transition: background-color 0.3s ease;
+  }  */
   .dropdown-toggle:hover{
     background-color: #bdb9b9;
   }
@@ -120,7 +120,7 @@ body {
     box-shadow: opx 8px 16px opx rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     z-index: 1;
-    font-size: 8px;
+    font-size: 10px;
   }
   .dropdown-content a {
     color: #443255;
@@ -128,8 +128,10 @@ body {
     text-decoration: none;
     display: block;
     border-bottom: 1px solid #ccc;
-    transition: background-color 0,3s ease;
-  }
+    transition: background-color 0.3s ease;
+    text-transform: none; /* Ensures text appears as written, not in uppercase */
+}
+
   .dropdown-content a:last-child {
     border-bottom: none;
   }
@@ -150,6 +152,40 @@ body {
     font-size: 8px;
     font-weight: bold;
   }
+  .notification-panel {
+    position: absolute;
+    top: 50px; /* Adjust this based on your header height */
+    right: 10px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+    display: none;
+}
+
+.notification-panel h3 {
+    margin-top: 0;
+    color: #443255;
+}
+
+.notification-panel ul {
+    list-style: none;
+    padding: 0;
+    color: #1b1b1b;
+}
+
+.notification-panel ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #dddde0;
+}
+
+.notification-panel ul li:last-child {
+    border-bottom: none;
+}
+
+  
   .content-header {
 background-image: url(../bg.jpg);
 background-repeat: no-repeat;
@@ -205,15 +241,17 @@ background-position: top;
   }
   
   .info-block {
-      background-color: #4ed460;
+     background-color: #068d8d;
       padding: 8px;
       border-radius: 5px;
-      border-left: 2px solid rgb(30, 163, 90);
+      border-left: 2px solid #012525;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-height: fit-content;
   }
   
   .info-block h4 {
       color: #25165c;
+      margin-top: 6px;
       margin-bottom: 5px;
       font-size: 15px;
   }
@@ -221,7 +259,7 @@ background-position: top;
   .info-block p {
       margin: 0;
       color: #e9f0ed;
-      
+      font-size: 12px;
   }
   .countdown{
       display: flex;
@@ -251,7 +289,6 @@ background-position: top;
       justify-items: center;
       align-items: center;
       font-size: 14px;
-      border:1px solid #cccbcf;
       color: rgb(41, 40, 40);
       width: 100%;
       bottom: 0;

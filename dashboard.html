@@ -4,8 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -27,14 +25,27 @@
                         <div class="notification-count">0</div>
                     </div>
                     <div class="dropdown-content">
-                     <a href="notification">
-                        <i class="fas fa-bell">Notifications<div class="notification-count">0</div></i>
-                     </a>
-                     <a href="login.html">
-                        <i class="fas fa-sign-out-alt">Logout</i>
-                     </a>
+                        <a href="javascript:void(0);" onclick="toggleNotifications()">
+                            <i class="fas fa-bell"></i> Notifications
+                            <div class="notification-count">0</div>
+                        </a>
+                        <a href="login.html">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
                     </div>
                 </div>
+                
+                <!-- Notification Panel -->
+                <div id="notificationPanel" class="notification-panel" style="display:none;">
+                    <h3>Notifications</h3>
+                    <ul>
+                        <li>You have some new tasks.</li>
+                        <li>Your submission has been approved.</li>
+                        <li>New message from admin.</li>
+                        <!-- Add more notifications as needed -->
+                    </ul>
+                </div>
+                
             </div>
 
 <script>
@@ -67,44 +78,43 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <a href="#" onclick="openSection('dashboard')">
-          <i class="material-icons">dashboard</i> Dashboard
+          <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
       
         <a href="#" onclick="openSection('training')">
-          <i class="material-icons">school</i> Training
+          <i class="fas fa-graduation-cap"></i> Training
         </a>
       
         <a href="#" onclick="openSection('availableTasks')">
-          <i class="material-icons">assignment</i> Available Tasks
+          <i class="fas fa-tasks"></i> Available Tasks
         </a>
       
         <a href="#" onclick="openSection('submissionPanel')">
-          <i class="material-icons">cloud_upload</i> Submission Panel
+          <i class="fas fa-cloud-upload-alt"></i> Submission Panel
         </a>
       
         <a href="#" onclick="openSection('withdrawFunds')">
-          <i class="material-icons">attach_money</i> Withdraw Funds
+          <i class="fas fa-money-bill-alt"></i> Withdraw Funds
         </a>
       
         <a href="#" onclick="openSection('upgradeToPremium')">
-          <i class="material-icons">star</i> Upgrade to Premium
+          <i class="fas fa-star"></i> Upgrade to Premium
         </a>
       
         <a href="#" onclick="openSection('referralProgram')">
-          <i class="material-icons">group</i> Referral Program
+          <i class="fas fa-users"></i> Referral Program
         </a>
       
         <a href="#" onclick="openSection('specialTraining')">
-          <i class="material-icons">badge</i> Special Training
+          <i class="fas fa-id-badge"></i> Special Training
         </a>
       
         <!-- Logout link -->
         <a href="#" id="logout">
-          <i class="material-icons">exit_to_app</i> Logout
+            <i class="fas fa-sign-out-alt"></i> Logout
         </a>
-      </div>
-      
-
+    </div>
+    
 <div id="main">
     
   <div id="dashboard" >
@@ -226,22 +236,21 @@
     <div class="conduct">
         <h4>YOU CAN FIND US:</h4>
         <p>Telegram Channel: <a href="t.me:" style="text-decoration: none;">Click to Join.</a> </p>
-        <p>Our Email: <a href ="mailto:internationalwritersofficial@gmail.com" style="text-decoration: none;">internationalwritersofficial@gmail.com</a> </p>
+        <p>Our Email: <a href ="mailto:internationalwritersofficial@gmail.com" style="text-decoration: none;">internationalwritersofficial<br>@gmail.com</a> </p>
     </div>
-
+    <div class="copyright"> 
+        <p>
+        ©
+        <script>document.write(new Date().getFullYear())</script> || INTERNATIONALWRITERS
+        </p>
   </div>
-  <div class="copyright"> 
-    <p>
-    ©
-    <script>document.write(new Date().getFullYear())</script> || INTERNATIONALWRITERS
-    </p>
-    </div>
-</div>
+  </div>
+  </div>
 <!-- training -->
 
 <div id="training" style="display: none;">
  <div class="content-header"> <h1 style="color: aliceblue;">Training</h1>
-    <p class="due" style="color: brown;">DUE IN:</p></div>
+    <p class="due" style="color: rgb(248, 247, 247);">DUE IN:</p></div>
   <div class="border">
   <section id="guidelines">
       <h2>Training Guidelines:</h2>
@@ -375,7 +384,7 @@
 
   <div id="availableTasks" style="display:none;">
     <div class="content-header"> <h1 style="color: aliceblue;">Available Tasks</h1>
-        <p class="due" style="color: brown;">DUE IN:</p>
+        <p class="due" style="color: rgb(247, 245, 245);">DUE IN:</p>
     </div>
     <div class="border">
     <div class="task-details">
@@ -846,7 +855,7 @@
   <!-- submissionPanel -->
   <div id="submissionPanel" style="display:none;" >
     <div class="content-header"> <h1 style="color: aliceblue;">Submission Panel</h1>
-        <p class="due" style="color: brown;">DUE IN:</p></div>
+        <p class="due" style="color: rgb(245, 241, 241);">DUE IN:</p></div>
     <div class="border">
     <div class="submission">
         <h2>Upload a PDF File</h2>
@@ -862,7 +871,7 @@
   <!-- withdrawFunds -->
   <div id="withdrawFunds" style="display:none;">
     <div class="content-header"> <h1 style="color: aliceblue;">Withdraw Funds</h1>
-        <p class="due" style="color: brown;">DUE IN:</p></div>
+        <p class="due" style="color: rgb(247, 242, 242);">DUE IN:</p></div>
     <div class="border">
     <div class="withdraw">
 
@@ -888,7 +897,7 @@
   <!-- upgradeToPremium -->
   <div id="upgradeToPremium" style="display:none;">
     <div class="content-header"> <h1 style="color: aliceblue;">Upgrade To Premium</h1>
-        <p class="due" style="color: brown;">DUE IN:</p></div>
+        <p class="due" style="color: rgb(243, 240, 240);">DUE IN:</p></div>
     <div class="border">
     <div class="premium">
         <section class="upgrade">
@@ -936,7 +945,7 @@
    <!-- Referral section -->
   <div id="referralProgram" style="display:none;">
     <div class="content-header"> <h1 style="color: aliceblue;">Referral Program</h1>
-        <p class="due" style="color: brown;">DUE IN:</p></div>
+        <p class="due" style="color: rgb(247, 243, 243);">DUE IN:</p></div>
     <div class="border">
     <div class="information-section">
         
@@ -971,7 +980,7 @@
   <!-- Special Training section -->
   <div id="specialTraining" style="display:none;">
     <div class="content-header"> <h1 style="color: aliceblue;">Special Training</h1>
-        <p class="due" style="color: brown;">DUE IN:</p></div>
+        <p class="due" style="color: rgb(30, 245, 2);">DUE IN:</p></div>
     <div class="border">
     <section class="training">
         <h2>How does special Training work?</h2>

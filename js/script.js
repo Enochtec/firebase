@@ -1,3 +1,14 @@
+// notification panel
+function toggleNotifications() {
+  var panel = document.getElementById('notificationPanel');
+  if (panel.style.display === 'none' || panel.style.display === '') {
+      panel.style.display = 'block';
+  } else {
+      panel.style.display = 'none';
+  }
+}
+
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
@@ -123,7 +134,7 @@ function showMessage(message, type) {
 
 
   // Set the date we're counting down to in the dashboard
-  var countDownDate = new Date("August 16, 2024 18:37:25").getTime();
+  var countDownDate = new Date("August 25, 2024 18:37:25").getTime();
       
       // Update the count down every 1 second
       var x = setInterval(function() {
@@ -152,7 +163,7 @@ function showMessage(message, type) {
       }, 1000);
 
  // Set the date we're counting down to submission of tasks
- var countDownDate = new Date("August 15, 2024 18:37:25").getTime();
+ var countDownDate = new Date("September 25, 2024 18:37:25").getTime();
       
  // Update the count down every 1 second
  var x = setInterval(function() {

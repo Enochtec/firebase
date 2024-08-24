@@ -15,6 +15,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    max-height: 8vh;
   }
   
   .header-container {
